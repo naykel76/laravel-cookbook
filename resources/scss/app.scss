@@ -1,0 +1,17 @@
+@use "node_modules/nk_jtb/src/variables/base" as * with (
+    $body-bg: rgb(243, 244, 246)
+);
+@use "node_modules/nk_jtb/src/variables/components" as * with (
+    $navbar-bg:  #494F6B
+);
+
+@use "node_modules/nk_jtb/src/mixins/media" as *;
+@use "node_modules/nk_jtb/src/jtb";
+
+.navbar {
+    border-bottom: 1px solid #ececec;
+    background-attachment: fixed;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+
