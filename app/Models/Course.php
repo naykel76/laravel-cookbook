@@ -11,6 +11,8 @@ class Course extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     protected $casts = [
         'price' => MoneyCast::class,
         'status' => PublishedStatus::class,

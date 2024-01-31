@@ -5,6 +5,10 @@
         "name": "Courses",
         "route_name": "courses.index",
         "exclude_route": true
+      },
+      {
+        "name": "File Uploads",
+        "route_name": "file-uploads.edit"
       }
     ]
   },
