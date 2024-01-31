@@ -2,7 +2,11 @@
     $body-bg: rgb(243, 244, 246)
 );
 @use "node_modules/nk_jtb/src/variables/components" as * with (
-    $navbar-bg:  #494F6B
+    $navbar-bg: #494f6b
+);
+
+@use "node_modules/nk_jtb/src/variables/utility_maps" as * with (
+    $base-container-size: 1600px
 );
 
 @use "node_modules/nk_jtb/src/mixins/media" as *;
@@ -13,5 +17,3 @@
     background-attachment: fixed;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
 }
-
-
