@@ -2,7 +2,7 @@
     x-init="
         open = {{ json_encode(session()->has('notification')) }};
         message = '{{ session('notification') }}';
-        setTimeout(() => { open = false }, 5000);
+        setTimeout(() => { open = false }, 4000);
     "
     x-show="open">
 

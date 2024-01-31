@@ -34,6 +34,8 @@ class FileUploadsController extends Controller
             ->with('notification', 'Save successful!');
     }
 
+    // this code is duplicated in the Livewire `FileUpload` component
+    // and should be refactored into a service class
     private function handleFile(UploadedFile $file, array &$validated)
     {
         if ($file) {
