@@ -26,9 +26,14 @@ class FileUploadsController extends Controller
     {
         $validated = $request->validate([
             'image' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:512',
+            'image_filepond' => 'sometimes', // force the filepond filed in the validated
         ]);
 
         $this->handleFile($request->file('image'), $validated);
+
+        if ($request->has('image_filepond')) {
+            $this->handleFilePondFile($validated);
+        }
 
         $course->update($validated);
 
@@ -39,9 +44,27 @@ class FileUploadsController extends Controller
     private function handleFile(?UploadedFile $file, array &$validated)
     {
         if ($file) {
-            $path = FileManagement::saveWithUnique($file, $this->directory, $this->disk);
-            $validated['image'] = $path;
+            /** @var \Naykel\Gotime\DTO\FileInfo $fileInfo */
+            $fileInfo = FileManagement::saveWithUnique($file, $this->directory, $this->disk);
+            $validated['image'] = $fileInfo->path();
         }
+    }
+
+    private function handleFilePondFile(array &$validated)
+    {
+        $tmpUpload = session('tmpUpload');
+        $path = $this->directory . "/" . $tmpUpload['filename'];
+
+        Storage::move(
+            $tmpUpload['tmpDirectory'] . "/" . $tmpUpload['filename'],
+            $this->disk . "/" . $path
+        );
+
+        session()->forget('tmpUpload');
+
+        Storage::deleteDirectory($tmpUpload['tmpDirectory']);
+
+        $validated['image_filepond'] = $path;
     }
 
     /**
@@ -54,16 +77,19 @@ class FileUploadsController extends Controller
     {
         if ($request->hasFile('image_filepond')) {
             $file = $request->file('image_filepond');
-            $directory = 'tmp/' . uniqid();
-            $path = FileManagement::saveWithUnique($file, $directory, 'local');
+            // `uniqueDir` is used by filepond to retrieve the files
+            $uniqueDir = 'tmp/' . uniqid(); // e.g. tmp/5f4b1c9b6b4a3
+            /** @var \Naykel\Gotime\DTO\FileInfo $fileInfo */
+            $fileInfo = FileManagement::saveWithUnique($file, $uniqueDir, 'local');
 
-            session(['' => [
-                'name' => $path,
-                'directory' => $directory,
+            session(['tmpUpload' => [
+                'filename' => $fileInfo->name, // 1706770166-cats.jpg
+                'tmpDirectory' => $fileInfo->directory, // tmp/65bb4094210e7
             ]]);
 
-            return $path;
+            return $uniqueDir;
         }
+
         return '';
     }
 
@@ -77,8 +103,11 @@ class FileUploadsController extends Controller
         $tmpUpload = session('tmpUpload');
 
         if ($tmpUpload) {
-            Storage::deleteDirectory($tmpUpload['directory']);
+            Storage::deleteDirectory($tmpUpload['tmpDirectory']);
             session()->forget('tmpUpload');
+
+            // FilePond expects an empty response on successful deletion.
+            // Do not change this to a success message or status code.
             return response('');
         }
     }
