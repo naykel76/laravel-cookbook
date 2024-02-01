@@ -16,6 +16,7 @@ class FileUpload extends Component
     protected string $disk = 'public';
     protected string $directory = 'courses';
     public $tmpUpload;
+    public $tmpUploadFilePond;
 
     public function mount()
     {
@@ -25,13 +26,15 @@ class FileUpload extends Component
     public function save()
     {
         $validated = $this->validate([
-            'tmpUpload' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'tmpUpload' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'tmpUploadFilePond' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:512',
         ]);
 
         $this->handleFile($this->tmpUpload, $validated);
+        $this->handleFilePondFile($this->tmpUploadFilePond, $validated);
 
         // Remove the tmpUpload from the validated data
-        unset($validated['tmpUpload']);
+        unset($validated['tmpUpload'], $validated['tmpUploadFilePond']);
 
         $this->course->update($validated);
 
@@ -39,14 +42,21 @@ class FileUpload extends Component
             ->with('notification', 'Save successful!');
     }
 
-
-    // this code is duplicated in the `FileUploadsController` and
-    // should be refactored into a service class
-    private function handleFile(UploadedFile $file, array &$validated)
+    private function handleFile(?UploadedFile $file, array &$validated)
     {
         if ($file) {
-            $path = FileManagement::saveWithUnique($file, $this->directory, $this->disk);
-            $validated['image'] = $path;
+            /** @var \Naykel\Gotime\DTO\FileInfo $fileInfo */
+            $fileInfo = FileManagement::saveWithUnique($file, $this->directory, $this->disk);
+            $validated['image'] = $fileInfo->path();
+        }
+    }
+
+    private function handleFilePondFile(?UploadedFile $file, array &$validated)
+    {
+        if ($file) {
+            /** @var \Naykel\Gotime\DTO\FileInfo $fileInfo */
+            $fileInfo = FileManagement::saveWithUnique($file, $this->directory, $this->disk);
+            $validated['image_filepond'] = $fileInfo->path();
         }
     }
 
@@ -54,9 +64,10 @@ class FileUpload extends Component
     {
         return <<<'HTML'
             <div>
-                <x-errors />
+                <x-errors></x-errors>
                 <form wire:submit.prevent="save">
-                    <x-gt-file-input wire:model="tmpUpload" for="tmpUpload" default/>
+                    <x-gt-file-input wire:model="tmpUpload" for="tmpUpload" default />
+                    <x-livewire.filepond wire:model="tmpUploadFilePond" for="tmpUploadFilePond"/>
                     <div class="tar">
                         <x-gt-submit class="primary" />
                     </div>
