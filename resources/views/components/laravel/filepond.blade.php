@@ -1,5 +1,6 @@
+@props(['for'])
 <div class="frm-row">
-    <input type="file" class="filepond-input w-full" style="display: none;">
+    <input type="file" name="{{ $for }}" class="filepond-input w-full">
 </div>
 
 @push('styles')
@@ -21,11 +22,10 @@
     <script>
         const inputElement = document.querySelector('.filepond-input');
         const pond = FilePond.create(inputElement);
-
         FilePond.setOptions({
             server: {
-                process: '/cookbook/file-uploads/tmp-upload',
-                revert: '/cookbook/file-uploads/tmp-delete',
+                process: '/file-uploads/tmp-upload',
+                revert: '/file-uploads/tmp-delete',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 }
