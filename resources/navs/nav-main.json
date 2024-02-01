@@ -7,6 +7,11 @@
         "exclude_route": true
       },
       {
+        "name": "Edit",
+        "url": "courses/1/edit",
+        "exclude_route": true
+      },
+      {
         "name": "File Uploads",
         "route_name": "file-uploads.edit"
       }
