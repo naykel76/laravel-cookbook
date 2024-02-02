@@ -2,7 +2,8 @@
     $body-bg: rgb(243, 244, 246)
 );
 @use "node_modules/nk_jtb/src/variables/components" as * with (
-    $navbar-bg: #494f6b
+    $navbar-bg: #494f6b,
+    $bx-padding: 1rem
 );
 
 @use "node_modules/nk_jtb/src/variables/utility_maps" as * with (
@@ -16,4 +17,21 @@
     border-bottom: 1px solid #ececec;
     background-attachment: fixed;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+.check-off-table {
+    table {
+        border: 1px solid #dddddd;
+    }
+    th,
+    td {
+        padding-block: 0.25rem;
+        padding-inline: 0.75rem;
+        border-bottom: 1px solid #dddddd;
+    }
+
+    th:is(:nth-child(2), :nth-child(3)) {
+        white-space: nowrap;
+        width: 1px;
+    }
 }
