@@ -16,7 +16,7 @@ class FileUploadsController extends Controller
 
     public function edit()
     {
-        return view('file-uploads.edit', [
+        return view('pages.file-uploads', [
             'pageTitle' => 'File Uploads',
             'course' => Course::first()
         ]);
