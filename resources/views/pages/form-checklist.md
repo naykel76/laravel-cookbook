@@ -2,7 +2,7 @@
 | :----------- | :-----: | :------: |
 | Checkbox     |         |          |
 | Date         |         |          |
-| File         |         |          |
+| File         |         |    x     |
 | Number       |         |          |
 | Radio        |         |          |
 | Select       |         |    x     |
@@ -14,8 +14,8 @@
 | Date      |         |          |
 | Money     |         |    x     |
 
-| Type  | Laravel | Livewire |
-| :---- | :-----: | :------: |
-| Date  |         |          |
-| Array |         |          |
-| Json  |         |          |
+| Integrations | Laravel | Livewire |
+| :----------- | :-----: | :------: |
+| CKEditor     |         |          |
+| Filepond     |         |          |
+| Trix         |         |          |

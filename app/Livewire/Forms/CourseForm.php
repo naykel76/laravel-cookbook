@@ -23,6 +23,12 @@ class CourseForm extends Form
     #[Validate('sometimes')]
     public string $published_at;
 
+
+    // there is no need to set the image in the model because it is not used
+    // for binding and will not be handled until the save method is called
+    #[Validate('required')]
+    public $image;
+
     public function rules()
     {
         return [
@@ -41,15 +47,6 @@ class CourseForm extends Form
         $this->price = sprintf("%.2f", $this->course->price);
         $this->body = $this->course->body ?? '';
         $this->status = $this->course->status->value ?? '';
-    }
-
-    /**
-     * Validate form object properties and persist the data.
-     */
-    public function update(): void
-    {
-        $validated = $this->validate();
-        $this->course->update($validated);
     }
 
     public function getModel(): Course

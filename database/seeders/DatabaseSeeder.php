@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             'body' => 'This course will introduce you to the world of computer science. Topics include computational thinking, problem-solving, data representation, abstraction, procedures/algorithms, and more.',
             // 'image' => 'intro_to_cs.jpg',
             'status' => 'published',
-            'price' => 1998.99,
+            'price' => 1998.90,
             'published_at' => now(),
         ]);
 

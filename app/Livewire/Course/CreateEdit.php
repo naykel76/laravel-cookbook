@@ -4,9 +4,9 @@ namespace App\Livewire\Course;
 
 use App\Livewire\Forms\CourseForm;
 use App\Models\Course;
-use App\Traits\Crudable;
 use Illuminate\Support\Facades\Route;
 use Livewire\Component;
+use Naykel\Gotime\Traits\Crudable;
 
 class CreateEdit extends Component
 {
@@ -14,9 +14,13 @@ class CreateEdit extends Component
 
     public CourseForm $form;
     public string $routePrefix = 'course';
-    public string $mainImage;
 
-    public $tmpUpload;
+    /**
+     * The 'main image' is for display purposes in the form.
+     *
+     * Note that it does not serve as a storage point for the image in the database.
+     */
+    public string $mainImage;
 
     public function mount(Course $course)
     {
