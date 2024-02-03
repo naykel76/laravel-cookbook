@@ -15,8 +15,8 @@ class FileUpload extends Component
     public Course $course;
     protected string $disk = 'public';
     protected string $directory = 'courses';
-    public $tmpUpload;
-    public $tmpUploadFilePond;
+    public $image;
+    public $image_filepond;
 
     public function mount()
     {
@@ -26,15 +26,12 @@ class FileUpload extends Component
     public function save()
     {
         $validated = $this->validate([
-            'tmpUpload' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'tmpUploadFilePond' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:512',
+            'image' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image_filepond' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $this->handleFile($this->tmpUpload, $validated);
-        $this->handleFilePondFile($this->tmpUploadFilePond, $validated);
-
-        // Remove the tmpUpload from the validated data
-        unset($validated['tmpUpload'], $validated['tmpUploadFilePond']);
+        $this->handleFile($this->image, $validated, 'image');
+        $this->handleFile($this->image_filepond, $validated, 'image_filepond');
 
         $this->course->update($validated);
 
@@ -42,21 +39,20 @@ class FileUpload extends Component
             ->with('notification', 'Save successful!');
     }
 
-    private function handleFile(?UploadedFile $file, array &$validated)
+    private function handleFile(?UploadedFile $file, array &$validated, string $key)
     {
-        if ($file) {
-            /** @var \Naykel\Gotime\DTO\FileInfo $fileInfo */
-            $fileInfo = FileManagement::saveWithUnique($file, $this->directory, $this->disk);
-            $validated['image'] = $fileInfo->path();
-        }
-    }
 
-    private function handleFilePondFile(?UploadedFile $file, array &$validated)
-    {
+        // Remove null values from validated array to prevent overwriting
+        // existing values with nulls when updating model.
+        if ($validated[$key] == null) {
+            unset($validated[$key]);
+            return;
+        }
+
         if ($file) {
             /** @var \Naykel\Gotime\DTO\FileInfo $fileInfo */
             $fileInfo = FileManagement::saveWithUnique($file, $this->directory, $this->disk);
-            $validated['image_filepond'] = $fileInfo->path();
+            $validated[$key] = $fileInfo->path();
         }
     }
 
@@ -66,9 +62,9 @@ class FileUpload extends Component
             <div>
                 <x-errors></x-errors>
                 <form wire:submit.prevent="save">
-                    <x-gt-file-input wire:model="tmpUpload" for="tmpUpload" default />
-                    <x-livewire.filepond wire:model="tmpUploadFilePond" for="tmpUploadFilePond"/>
-                    <div class="tar">
+                    <x-gt-file-input wire:model="image" for="image" default />
+                    <x-livewire.filepond wire:model="image_filepond" for="image_filepond"/>
+                    <div class="flex space-between">
                         <x-gt-submit class="primary" />
                     </div>
                 </form>

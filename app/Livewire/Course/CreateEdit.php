@@ -16,6 +16,8 @@ class CreateEdit extends Component
     public string $routePrefix = 'course';
     public string $mainImage;
 
+    public $tmpUpload;
+
     public function mount(Course $course)
     {
         // $model = $course->id ? $course : new Course;
@@ -25,10 +27,11 @@ class CreateEdit extends Component
         $this->mainImage = $model->image ?? '';
     }
 
-    public function afterPersistHook () {
+    public function afterPersistHook()
+    {
+        // this is just for development purposes to refresh the page so the
+        // laravel form updates as well
         $this->redirect('/courses/1/edit');
-        // $this->redirectRoute('courses.edit', ['id' => 1]);
-    //    $this->redirect()->route("{$this->routePrefix}.index");
     }
 
     public function render()

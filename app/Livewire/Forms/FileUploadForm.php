@@ -27,7 +27,7 @@ class FileUploadForm extends Component
     {
         $validated = $this->validate([
             'tmpUpload' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'tmpUploadFilePond' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:512',
+            'tmpUploadFilePond' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $this->handleFile($this->tmpUpload, $validated);

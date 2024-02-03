@@ -4,14 +4,6 @@
         <div class="bx pxy-1 tac bg-sky-200">
             <p>Make sure to include 'enctype' in your form tag <code>enctype="multipart/form-data"</code>.</p>
         </div>
-        <div class="bx dark tac">
-            <p>Errors do not play well here because both components have the same input names. <br>It's only for testing
-                so just run with it!</p>
-        </div>
-        <div class="bx tac">
-            FilePond validation for the file size is hard coded in the component.
-        </div>
-        <x-errors />
         <x-notification />
     </div>
 

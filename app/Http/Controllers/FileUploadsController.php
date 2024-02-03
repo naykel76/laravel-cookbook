@@ -25,7 +25,7 @@ class FileUploadsController extends Controller
     public function update(Request $request, Course $course)
     {
         $validated = $request->validate([
-            'image' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:512',
+            'image' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'image_filepond' => 'sometimes', // force the filepond filed in the validated
         ]);
 

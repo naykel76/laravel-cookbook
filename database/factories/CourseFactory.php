@@ -12,7 +12,7 @@ class CourseFactory extends Factory
             'name' => $this->faker->sentence,
             'code' => strtoupper($this->faker->unique()->bothify('??###?')),
             'body' => $this->faker->text($maxNbChars = 500),
-            'image' => $this->faker->imageUrl($width = 640, $height = 480),
+            // 'image' => $this->faker->imageUrl($width = 640, $height = 480),
             'status' => $this->faker->randomElement($array = array('draft', 'pending_review', 'published', 'archived')),
             'is_free' => $this->faker->boolean($chanceOfGettingTrue = 50),
             'price' => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),

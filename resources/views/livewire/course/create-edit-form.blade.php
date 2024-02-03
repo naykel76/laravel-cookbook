@@ -5,6 +5,7 @@
         <x-gt-input wire:model="form.price" for="form.price" label="price" />
         <x-gt-select wire:model="form.status" for="form.status" label="status" :options="\App\Models\Course::statuses()" />
     </div>
+    <x-gt-file-input wire:model="tmpUpload" for="tmpUpload" default/>
     <div class="tar">
         <x-gt-button-save wire:click.prevent="save" />
     </div>
