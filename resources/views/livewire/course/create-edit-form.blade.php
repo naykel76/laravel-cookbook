@@ -6,6 +6,7 @@
         <x-gt-select wire:model="form.status" for="form.status" label="status"
             :options="\App\Models\Course::statuses()" />
     </div>
+    <x-gt-filepond wire:model="form.image_filepond" for="form.image_filepond" />
     <x-gt-file-input wire:model="form.image" for="form.image" default />
     <div class="tar">
         <x-gt-button-save wire:click.prevent="save" />

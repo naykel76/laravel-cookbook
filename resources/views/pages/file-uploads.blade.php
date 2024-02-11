@@ -27,7 +27,6 @@
             <livewire:file-upload />
         </x-slot>
 
-
         @include('diagrams.filepond-tmp-upload-flowchart')
         @include('diagrams.livewire-file-upload-sequence-diagram')
 

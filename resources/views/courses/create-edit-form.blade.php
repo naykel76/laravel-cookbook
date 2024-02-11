@@ -8,7 +8,7 @@
         <x-gt-select for="status" label="status" :options="\App\Models\Course::statuses()" disabled />
     </div>
     <div class="frm flex space-between va-b">
-        <p class="txt-red txt-sm">**The Laravel price is not formatting too two decimal places correctly.</p>
+        <p class="txt-red txt-sm">**The Laravel price is not formatting the two decimal places correctly.</p>
         <x-gt-submit class="primary" />
     </div>
 </form>
