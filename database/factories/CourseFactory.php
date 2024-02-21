@@ -9,7 +9,7 @@ class CourseFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->sentence,
+            'title' => $this->faker->sentence,
             'code' => strtoupper($this->faker->unique()->bothify('??###?')),
             'body' => $this->faker->text($maxNbChars = 500),
             // 'image' => $this->faker->imageUrl($width = 640, $height = 480),

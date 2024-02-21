@@ -4,8 +4,8 @@
             <tr>
                 <x-gt-table.th wire:click="sortBy('code')" sortable
                     :direction="$this->getSortDirection('code')"> Code </x-gt-table.th>
-                <x-gt-table.th wire:click="sortBy('Name')" sortable
-                    :direction="$this->getSortDirection('Name')"> Course Name </x-gt-table.th>
+                <x-gt-table.th wire:click="sortBy('Title')" sortable
+                    :direction="$this->getSortDirection('Title')"> Course Title </x-gt-table.th>
                 <x-gt-table.th wire:click="sortBy('status')" sortable alignCenter
                     :direction="$this->getSortDirection('status')"> Status </x-gt-table.th>
                 <x-gt-table.th class="tar"> Price </x-gt-table.th>
@@ -15,7 +15,7 @@
             @forelse($courses as $course)
                 <tr wire:key="{{ $course->id }}">
                     <td> {{ $course->code }} </td>
-                    <td> {{ str($course->name)->limit(40) }} </td>
+                    <td> {{ str($course->title)->limit(40) }} </td>
                     <td class="tac">
                         <div class="inline-flex rounded-full txt-xs py-0125 px-05 opacity-08 {{ $course->status->color() }}">
                             {{ $course->status->label() }}

@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
 
         \App\Models\Course::factory()->create([
-            'name' => 'Introduction to Computer Science',
+            'title' => 'Introduction to Computer Science',
             'code' => 'CS101',
             'body' => 'This course will introduce you to the world of computer science. Topics include computational thinking, problem-solving, data representation, abstraction, procedures/algorithms, and more.',
             // 'image' => 'intro_to_cs.jpg',
@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Course::factory()->create([
-            'name' => 'Data Structures and Algorithms',
+            'title' => 'Data Structures and Algorithms',
             'code' => 'CS102',
             'body' => 'This course will teach you about various data structures and algorithms used in computer science. Topics include arrays, linked lists, stacks, queues, trees, sorting, searching, and more.',
             // 'image' => 'data_structures.jpg',
@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Course::factory()->create([
-            'name' => 'Web Development',
+            'title' => 'Web Development',
             'code' => 'CS103',
             'body' => 'This course will teach you how to build websites using HTML, CSS, and JavaScript. Topics include responsive design, front-end libraries, back-end servers, databases, and more.',
             // 'image' => 'web_development.jpg',

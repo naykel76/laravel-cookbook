@@ -12,7 +12,7 @@ class CourseForm extends Form
     public Course $course;
 
     #[Validate('required|max:255')]
-    public string $name;
+    public string $title;
     #[Validate('sometimes|regex:/^\d+(\.\d{2})?$/')]
     public ?string $price; // uses MoneyCast::class
     public string $code;
@@ -42,7 +42,7 @@ class CourseForm extends Form
     public function setModel(Course $course): void
     {
         $this->course = $course;
-        $this->name = $this->course->name ?? '';
+        $this->title = $this->course->title ?? '';
         $this->code = $this->course->code ?? '';
         $this->price = sprintf("%.2f", $this->course->price);
         $this->body = $this->course->body ?? '';

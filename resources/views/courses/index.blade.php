@@ -5,7 +5,7 @@
             <div class="flex-col">
                 @forelse($courses as $course)
                     <div class="flex space-between">
-                        <a href="{{ route('courses.show', $course->id) }}">{{ $course->name }}</a>
+                        <a href="{{ route('courses.show', $course->id) }}">{{ $course->title }}</a>
                         <div class="flex">
                             <a href="{{ route('courses.edit', $course->id) }}" class="disabled">
                                 <x-gt-icon name="pencil-square" class="txt-sky opacity-06" /></a>

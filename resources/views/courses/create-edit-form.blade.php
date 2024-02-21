@@ -1,7 +1,7 @@
 <form action="{{ route('courses.update', $course->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
-    <x-gt-input for="name" label="Course Name" value="{{ $course->name }}" req />
+    <x-gt-input for="title" label="Course Title" value="{{ $course->title }}" req />
     <div class="grid cols-3 gap">
         <x-gt-input for="code" label="code" value="{{ $course->code }}" req />
         <x-gt-input for="price" label="price" value="{{ $course->price }}" />
