@@ -1,29 +1,29 @@
 {
-  "main": {
-    "links": [
-      {
-        "name": "Courses",
-        "route_name": "courses.index",
-        "exclude_route": true
-      },
-      {
-        "name": "Edit",
-        "url": "courses/1/edit",
-        "exclude_route": true
-      },
-      {
-        "name": "File Uploads",
-        "route_name": "file-uploads.edit"
-      }
-    ]
-  },
-  "footer": {
-    "links": [
-      {
-        "name": "Home",
-        "route_name": "home",
-        "exclude_route": true
-      }
-    ]
-  }
+    "main": {
+        "links": [
+            {
+                "name": "Courses",
+                "route_name": "courses.index",
+                "exclude_route": true
+            },
+            {
+                "name": "Edit",
+                "url": "courses/1/edit",
+                "exclude_route": true
+            },
+            {
+                "name": "File Uploads",
+                "route_name": "file-uploads.edit"
+            }
+        ]
+    },
+    "footer": {
+        "links": [
+            {
+                "name": "Home",
+                "route_name": "home",
+                "exclude_route": true
+            }
+        ]
+    }
 }
